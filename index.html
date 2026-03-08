@@ -412,6 +412,33 @@
             }
         }
 
+        /* Override media queries for PDF generation */
+        body.force-desktop-layout .header {
+            flex-direction: row !important;
+            height: 200px !important;
+            padding: 0 35px !important;
+            text-align: left !important;
+        }
+
+        body.force-desktop-layout .profile-img-container {
+            margin-right: 35px !important;
+            margin-bottom: 0 !important;
+        }
+
+        body.force-desktop-layout .main {
+            flex-direction: row !important;
+        }
+
+        body.force-desktop-layout .sidebar {
+            width: 35% !important;
+            padding: 35px 30px !important;
+        }
+
+        body.force-desktop-layout .content-area {
+            width: 65% !important;
+            padding: 35px 35px 35px 40px !important;
+        }
+
         @media screen and (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -460,7 +487,7 @@
             <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
             <div class="profile-img-container" onclick="document.getElementById('imageUpload').click();">
                 <img src="photo.jpg" id="profileImage" alt="Profile Picture"
-                    onerror="this.src='https://via.placeholder.com/135?text=Upload+Photo'">
+                    onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'135\' height=\'135\'><rect width=\'135\' height=\'135\' fill=\'%23cccccc\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'14\' fill=\'%23333333\'>Upload Photo</text></svg>'">
                 <div class="profile-img-overlay hide-on-print">
                     <span><i class="fas fa-camera"></i> Change</span>
                 </div>
@@ -655,6 +682,9 @@
 
         // Handle PDF Download
         function downloadPDF() {
+            // Force desktop layout before rendering
+            document.body.classList.add('force-desktop-layout');
+
             // Hide elements that shouldn't be in the PDF
             const hideElements = document.querySelectorAll('.hide-on-print');
             hideElements.forEach(el => el.style.display = 'none');
@@ -669,11 +699,19 @@
             const element = document.getElementById('cv-container');
 
             // Use html2canvas to capture the full CV as a single image
-            html2canvas(element, {
+            const renderPromise = html2canvas(element, {
                 scale: 2,
                 useCORS: true,
-                logging: false
-            }).then(function (canvas) {
+                logging: false,
+                windowWidth: 1000 // Trick html2canvas into seeing a wide window
+            });
+
+            // Fallback timeout in case html2canvas hangs (e.g. CORS issues)
+            const timeoutPromise = new Promise((_, reject) => {
+                setTimeout(() => reject(new Error('html2canvas timed out')), 8000);
+            });
+
+            Promise.race([renderPromise, timeoutPromise]).then(function (canvas) {
                 const imgData = canvas.toDataURL('image/jpeg', 0.98);
 
                 // Get the canvas dimensions
@@ -712,6 +750,7 @@
         }
 
         function restoreEditing(hideElements, editables) {
+            document.body.classList.remove('force-desktop-layout');
             hideElements.forEach(el => el.style.display = '');
             editables.forEach(el => {
                 el.setAttribute('contenteditable', 'true');
