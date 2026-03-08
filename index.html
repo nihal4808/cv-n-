@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editable CV Template</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- html2canvas + jsPDF for downloading the CV -->
@@ -36,7 +39,8 @@
             /* 794px represents A4 width at 96dpi */
             background: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            border: 6px solid white;
+            border: 1px solid #E5E7EB;
+            /* Added thin border */
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -53,10 +57,10 @@
         }
 
         .profile-img-container {
-            width: 135px;
-            height: 135px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            border: 6px solid white;
+            border: 2px solid white;
             margin-right: 35px;
             background-color: #e4e6eb;
             overflow: hidden;
@@ -547,6 +551,941 @@
         .cropper-face {
             border-radius: 50%;
         }
+
+        /* ========================================================
+           MODERN ATS-FRIENDLY THEME (Togglable)
+           ======================================================== */
+
+        .modern-theme {
+            background: #E5E7EB;
+            /* Subtle gray bg outside CV */
+        }
+
+        .modern-theme .container {
+            font-family: 'Inter', sans-serif;
+            color: #1F2937;
+            border: 1px solid #E5E7EB;
+            /* Added thin border */
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: #FFFFFF;
+        }
+
+        .modern-theme .header {
+            background-color: #FFFFFF;
+            /* Clean white header */
+            color: #1F2937;
+            border-bottom: 2px solid #E5E7EB;
+            padding: 40px;
+            height: auto;
+        }
+
+        /* Profile photo */
+        .modern-theme .profile-img-container {
+            border: 2px solid #E5E7EB;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            background-color: #F9FAFB;
+        }
+
+        /* Main Name / Title */
+        .modern-theme .header-info {
+            color: #1F2937;
+        }
+
+        .modern-theme .header-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #1F2937;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .modern-theme .header-info h2 {
+            font-family: 'Inter', sans-serif;
+            color: #2563EB;
+            /* Professional Blue */
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        /* Sidebar */
+        .modern-theme .sidebar {
+            background-color: #F9FAFB;
+            color: #374151;
+            border-right: 1px solid #E5E7EB;
+        }
+
+        .modern-theme .sidebar-title {
+            color: #2563EB;
+            border-bottom: 2px solid #E5E7EB;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+        }
+
+        .modern-theme .contact-item i {
+            color: #2563EB;
+            margin-top: 3px;
+        }
+
+        /* Bullets */
+        .modern-theme .sidebar ul.custom-bullets li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 14px;
+            top: 0px;
+        }
+
+        .modern-theme .skills-list>li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 14px;
+            top: 0px;
+        }
+
+        /* Main content area */
+        .modern-theme .content-area {
+            background-color: #FFFFFF;
+        }
+
+        .modern-theme .main-title {
+            color: #2563EB;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        .modern-theme .main-title::after {
+            border-bottom: 2px solid #E5E7EB;
+        }
+
+        .modern-theme .edu-degree {
+            color: #1F2937;
+            font-weight: 700;
+        }
+
+        .modern-theme .edu-year {
+            color: #6B7280;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Pill badges for generic li if desired, but here we just keep text clean */
+        .modern-theme .ref-name {
+            color: #1F2937;
+        }
+
+        /* Hover & Focus states for Content Editable in Modern Theme */
+        .modern-theme [contenteditable="true"] {
+            transition: all 0.2s ease-in-out;
+            border-radius: 4px;
+        }
+
+        .modern-theme [contenteditable="true"]:hover {
+            background-color: #EFF6FF !important;
+            /* light blue */
+            outline: 1px dashed #BFDBFE !important;
+            cursor: pointer;
+        }
+
+        .modern-theme [contenteditable="true"]:focus {
+            background-color: #DBEAFE !important;
+            outline: 2px solid #3B82F6 !important;
+            cursor: text;
+        }
+
+        /* Override print styles specifically for modern theme */
+        @media print {
+            body.modern-theme .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+
+        /* ========================================================
+           MODERN-PREMIUM THEME (Dark Sidebar, FlowCV/Novoresume style)
+           ======================================================== */
+
+        body.modern-premium {
+            background: #F8FAFC;
+        }
+
+        .modern-premium .container {
+            font-family: 'Inter', sans-serif;
+            color: #0F172A;
+            border: 1px solid #E2E8F0;
+            /* Added thin border */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background: #FFFFFF;
+            overflow: hidden;
+        }
+
+        /* Header merges with the main content layout visually */
+        .modern-premium .header {
+            background-color: transparent;
+            padding: 0;
+            height: auto;
+            display: none;
+            /* We hide the top header and move its content visually if possible, 
+                              but since we can't change HTML, we must style the existing top header 
+                              to look like part of the right column or just style it cleanly on top. 
+                              Actually, the request implies standard 2-column. 
+                              Let's make the header Indigo on top, or we can make the sidebar go all the way up? 
+                              Since HTML structure is fixed (Header on top, Main below containing Sidebar/Content), 
+                              we will style the Header dark like the sidebar to blend them. */
+        }
+
+        /* Because HTML structure has .header above .main, we will make .header and .sidebar both Dark */
+        .modern-premium .header {
+            display: flex;
+            background-color: #111827;
+            border-bottom: 1px solid #334155;
+            padding: 40px;
+        }
+
+        .modern-premium .header-info h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .modern-premium .header-info h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #06B6D4;
+            /* Cyan accent */
+            letter-spacing: 1.5px;
+        }
+
+        .modern-premium .profile-img-container {
+            border: 3px solid #4F46E5;
+            /* Indigo */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background-color: #1E293B;
+        }
+
+        .modern-premium .main {
+            background-color: #F8FAFC;
+        }
+
+        .modern-premium .sidebar {
+            background-color: #111827;
+            color: #E5E7EB;
+            padding: 40px 30px;
+        }
+
+        .modern-premium .sidebar-title {
+            font-family: 'Poppins', sans-serif;
+            color: #4F46E5;
+            /* Indigo */
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+
+        .modern-premium .contact-item {
+            font-size: 12px;
+            color: #E5E7EB;
+        }
+
+        .modern-premium .contact-item i {
+            color: #06B6D4;
+        }
+
+        .modern-premium .sidebar ul.custom-bullets li {
+            font-size: 12px;
+            color: #E5E7EB;
+        }
+
+        .modern-premium .sidebar ul.custom-bullets li::before {
+            content: "■";
+            color: #06B6D4;
+        }
+
+        .modern-premium .reference-block .ref-name {
+            color: #FFFFFF;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .modern-premium .reference-block .ref-strong {
+            color: #06B6D4;
+        }
+
+        /* Right Content Area */
+        .modern-premium .content-area {
+            background-color: #F8FAFC;
+            /* Light BG for main area */
+            padding: 40px;
+        }
+
+        /* Card Style for Sections */
+        .modern-premium .main-section {
+            background: #FFFFFF;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            margin-bottom: 24px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .modern-premium .main-title {
+            font-family: 'Poppins', sans-serif;
+            color: #0F172A;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .modern-premium .main-title::after {
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .modern-premium .profile-text {
+            color: #475569;
+            font-size: 13px;
+        }
+
+        .modern-premium .edu-header {
+            align-items: center;
+        }
+
+        .modern-premium .edu-degree {
+            font-family: 'Poppins', sans-serif;
+            color: #0F172A;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .modern-premium .edu-year {
+            background: #EEF2FF;
+            color: #4F46E5;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .modern-premium .edu-school {
+            color: #475569;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* Pill styling for clinical skills */
+        .modern-premium .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .modern-premium .skills-list>li {
+            background: #EEF2FF;
+            color: #4F46E5;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            padding-left: 14px;
+            /* remove bullet padding */
+            border: 1px solid #C7D2FE;
+        }
+
+        .modern-premium .skills-list>li::before {
+            display: none;
+            /* Hide default bullet */
+        }
+
+        .modern-premium .sub-skills {
+            display: none;
+            /* Hide sub-bullets inside pills for clean look, or style them inline. We hide them to keep pills clean */
+        }
+
+        .modern-premium .declaration-text {
+            color: #475569;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        /* Hover & Focus states for Content Editable in Premium Theme */
+        .modern-premium [contenteditable="true"] {
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .modern-premium [contenteditable="true"]:hover {
+            background-color: rgba(79, 70, 229, 0.05) !important;
+            outline: 1px dashed #A5B4FC !important;
+            cursor: pointer;
+        }
+
+        .modern-premium [contenteditable="true"]:focus {
+            background-color: #FFFFFF !important;
+            outline: 2px solid #4F46E5 !important;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            cursor: text;
+        }
+
+        .modern-premium .sidebar [contenteditable="true"]:hover,
+        .modern-premium .header [contenteditable="true"]:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            outline: 1px dashed #94A3B8 !important;
+        }
+
+        .modern-premium .sidebar [contenteditable="true"]:focus,
+        .modern-premium .header [contenteditable="true"]:focus {
+            background-color: #1E293B !important;
+            outline: 2px solid #06B6D4 !important;
+            color: #FFFFFF;
+        }
+
+        @media print {
+            body.modern-premium .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            body.modern-premium .main-section {
+                box-shadow: none;
+                border: 1px solid #E2E8F0;
+                padding: 15px 20px;
+                margin-bottom: 15px;
+            }
+
+            body.modern-premium .header,
+            body.modern-premium .sidebar {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* ========================================================
+           GLASS-MODERN THEME (Glassmorphism, Gradient BG)
+           ======================================================== */
+
+        body.glass-modern {
+            /* Background gradient for the whole page */
+            background: linear-gradient(135deg, #6366F1, #22D3EE);
+            background-attachment: fixed;
+        }
+
+        .glass-modern .container {
+            font-family: 'Inter', sans-serif;
+            color: #0F172A;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            /* Added thin border */
+            border-radius: 20px;
+            /* Main container is transparent so inner cards show the background */
+            background: transparent;
+            box-shadow: none;
+            gap: 20px;
+            padding: 20px;
+            max-width: 834px;
+            /* Slightly wider to accommodate padding */
+        }
+
+        /* The original header/sidebar/content blocks become glass cards */
+
+        .glass-modern .header {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 40px;
+            height: auto;
+        }
+
+        .glass-modern .profile-img-container {
+            border: 4px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-modern .header-info h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #0F172A;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .glass-modern .header-info h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #4F46E5;
+            letter-spacing: 1.5px;
+        }
+
+        .glass-modern .main {
+            background: transparent;
+            gap: 20px;
+        }
+
+        .glass-modern .sidebar {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 33%;
+        }
+
+        .glass-modern .content-area {
+            background: transparent;
+            padding: 0;
+            width: 67%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .glass-modern .main-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 0;
+        }
+
+        .glass-modern .sidebar-title,
+        .glass-modern .main-title {
+            font-family: 'Poppins', sans-serif;
+            color: #4F46E5;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid rgba(79, 70, 229, 0.2);
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+
+        .glass-modern .main-title::after {
+            display: none;
+            /* Hide the flex underline from default style */
+        }
+
+        .glass-modern .contact-item {
+            color: #334155;
+            font-size: 13px;
+        }
+
+        .glass-modern .contact-item i {
+            color: #4F46E5;
+        }
+
+        .glass-modern .sidebar ul.custom-bullets li {
+            color: #334155;
+        }
+
+        .glass-modern .sidebar ul.custom-bullets li::before {
+            content: "•";
+            color: #4F46E5;
+            font-size: 16px;
+            top: -2px;
+        }
+
+        .glass-modern .profile-text,
+        .glass-modern .declaration-text {
+            color: #334155;
+            font-size: 13px;
+        }
+
+        .glass-modern .edu-degree {
+            font-family: 'Poppins', sans-serif;
+            color: #0F172A;
+        }
+
+        .glass-modern .edu-year {
+            color: #6366F1;
+            font-weight: 600;
+        }
+
+        .glass-modern .edu-school {
+            color: #334155;
+            font-size: 13px;
+        }
+
+        .glass-modern .reference-block .ref-name {
+            color: #4F46E5;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .glass-modern .reference-block .ref-strong {
+            color: #0F172A;
+        }
+
+        /* Glass Floating Badges for Skills */
+        .glass-modern .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .glass-modern .skills-list>li {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            color: #0F172A;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            padding-left: 16px;
+            /* remove custom bullet padding */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-modern .skills-list>li::before {
+            display: none;
+        }
+
+        .glass-modern .sub-skills {
+            display: block;
+            margin-top: 8px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .glass-modern .sub-skills li {
+            font-size: 11px;
+            font-weight: 500;
+            color: #334155;
+            margin-bottom: 4px;
+        }
+
+        /* Hover & Focus states for Content Editable in Glass Theme */
+        .glass-modern [contenteditable="true"] {
+            transition: all 0.2s ease;
+            border-radius: 6px;
+        }
+
+        .glass-modern [contenteditable="true"]:hover {
+            background-color: rgba(255, 255, 255, 0.3) !important;
+            outline: 1px dashed rgba(79, 70, 229, 0.4) !important;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .glass-modern [contenteditable="true"]:focus {
+            background-color: rgba(255, 255, 255, 0.6) !important;
+            outline: 2px solid #4F46E5 !important;
+            cursor: text;
+        }
+
+        /* Print adjustments for Glassmorphism 
+           (html2canvas struggles with backdrop-filter, so we simplify background for export) */
+        @media print {
+            body.glass-modern {
+                background: linear-gradient(135deg, #6366F1, #22D3EE) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body.glass-modern .container {
+                padding: 0;
+            }
+
+            body.glass-modern .header,
+            body.glass-modern .sidebar,
+            body.glass-modern .main-section {
+                background: rgba(255, 255, 255, 0.8) !important;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                box-shadow: none;
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body.glass-modern .sidebar {
+                margin-right: 20px;
+            }
+        }
+
+        /* ========================================================
+           OPTOMETRIC-CLEAN THEME (Clean Medical, Eye-Care Inspired)
+           ======================================================== */
+
+        body.optometric-clean {
+            background-color: #F8FBFF;
+        }
+
+        .optometric-clean .container {
+            font-family: 'Inter', sans-serif;
+            color: #1E293B;
+            border: 1px solid #E2E8F0;
+            /* Added thin border */
+            border-radius: 12px;
+            background: transparent;
+            box-shadow: none;
+            gap: 20px;
+            padding: 20px;
+            max-width: 834px;
+        }
+
+        .optometric-clean .header {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            margin-bottom: 20px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #E2E8F0;
+        }
+
+        .optometric-clean .profile-img-container {
+            border: 3px solid #06B6D4;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+            background-color: #FFFFFF;
+        }
+
+        .optometric-clean .header-info h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: #1E293B;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .optometric-clean .header-info h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2563EB;
+            /* Primary medical blue */
+            letter-spacing: 1.5px;
+        }
+
+        .optometric-clean .main {
+            gap: 20px;
+        }
+
+        /* Light cyan sidebar background */
+        .optometric-clean .sidebar {
+            background-color: #F0F9FF;
+            /* Light medical blue/cyan */
+            border: 1px solid #E0F2FE;
+            border-radius: 12px;
+            padding: 30px;
+            width: 33%;
+        }
+
+        .optometric-clean .content-area {
+            width: 67%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 0;
+            background: transparent;
+        }
+
+        /* White card for right sections */
+        .optometric-clean .main-section {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #E2E8F0;
+            padding: 22px;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* Section Titles (Medical style underline accent) */
+        .optometric-clean .sidebar-title,
+        .optometric-clean .main-title {
+            font-family: 'Poppins', sans-serif;
+            color: #2563EB;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 2px solid #0EA5E9;
+            /* Highlight accent */
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .optometric-clean .main-title::after {
+            display: none;
+            /* remove original flex pseudo-element */
+        }
+
+        .optometric-clean .sidebar-section {
+            border-bottom: 1px solid #E0F2FE;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .optometric-clean .sidebar-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .optometric-clean .contact-item {
+            color: #64748B;
+            font-size: 12px;
+        }
+
+        .optometric-clean .contact-item i {
+            color: #06B6D4;
+        }
+
+        .optometric-clean .sidebar ul.custom-bullets li {
+            color: #64748B;
+            font-size: 12px;
+        }
+
+        .optometric-clean .sidebar ul.custom-bullets li::before {
+            content: "•";
+            color: #06B6D4;
+        }
+
+        .optometric-clean .profile-text,
+        .optometric-clean .declaration-text {
+            color: #64748B;
+            font-size: 13px;
+        }
+
+        .optometric-clean .edu-degree {
+            font-family: 'Poppins', sans-serif;
+            color: #1E293B;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .optometric-clean .edu-year {
+            color: #2563EB;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .optometric-clean .edu-school {
+            color: #64748B;
+            font-size: 13px;
+        }
+
+        .optometric-clean .reference-block .ref-name {
+            color: #2563EB;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .optometric-clean .reference-block .ref-strong {
+            color: #1E293B;
+        }
+
+        /* Clean Medical Badges for Skills */
+        .optometric-clean .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .optometric-clean .skills-list>li {
+            background-color: #E0F2FE;
+            color: #0369A1;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            padding-left: 12px;
+            /* remove custom bullet padding */
+            border: 1px solid #BAE6FD;
+            box-shadow: none;
+        }
+
+        .optometric-clean .skills-list>li::before {
+            display: none;
+        }
+
+        .optometric-clean .sub-skills {
+            display: block;
+            margin-top: 8px;
+            padding-left: 4px;
+            list-style: none;
+            width: 100%;
+        }
+
+        .optometric-clean .sub-skills li {
+            font-size: 11px;
+            font-weight: 500;
+            color: #0369A1;
+            margin-bottom: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        /* Hover & Focus states for Content Editable */
+        .optometric-clean [contenteditable="true"] {
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .optometric-clean [contenteditable="true"]:hover {
+            background-color: #EFF6FF !important;
+            /* light blue highlight */
+            outline: 1px dashed #BFDBFE !important;
+            cursor: pointer;
+        }
+
+        .optometric-clean [contenteditable="true"]:focus {
+            background-color: #FFFFFF !important;
+            outline: 2px solid #2563EB !important;
+            cursor: text;
+        }
+
+        @media print {
+            body.optometric-clean {
+                background-color: #FFFFFF !important;
+            }
+
+            body.optometric-clean .container {
+                padding: 0;
+            }
+
+            body.optometric-clean .header,
+            body.optometric-clean .main-section {
+                box-shadow: none;
+                border: 1px solid #E2E8F0;
+            }
+
+            body.optometric-clean .sidebar {
+                background-color: #F0F9FF !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border: 1px solid #E0F2FE;
+            }
+        }
     </style>
 </head>
 
@@ -567,8 +1506,15 @@
     </div>
 
     <div class="editor-controls hide-on-print" id="downloadBtnContainer">
+        <button class="btn" id="themeSwitchBtn" style="background-color: #4F46E5; margin-bottom: 10px;"
+            onclick="cycleTheme()">
+            <i class="fas fa-palette"></i> Theme: Classic
+        </button>
         <button class="btn" onclick="downloadPDF()">
             <i class="fas fa-download"></i> Download as PDF
+        </button>
+        <button class="btn" style="background-color: #059669; margin-top: 10px;" onclick="downloadAllThemes()">
+            <i class="fas fa-file-pdf"></i> Download All Themes
         </button>
     </div>
 
@@ -590,8 +1536,8 @@
             </div>
 
             <div class="header-info">
-                <h1 id="cv-name" contenteditable="true">NIHAL KP</h1>
-                <h2 contenteditable="true">OPTOMETRY STUDENT</h2>
+                <h1 id="cv-name" contenteditable="true" data-field="name">NIHAL KP</h1>
+                <h2 contenteditable="true" data-field="title">OPTOMETRY STUDENT</h2>
             </div>
         </div>
 
@@ -601,72 +1547,76 @@
             <div class="sidebar">
 
                 <div class="sidebar-section">
-                    <div class="sidebar-title" contenteditable="true">CONTACT</div>
+                    <div class="sidebar-title" contenteditable="true" data-field="contactTitle">CONTACT</div>
 
                     <div class="contact-item">
                         <i class="fas fa-phone-alt"></i>
-                        <div contenteditable="true">9633024808</div>
+                        <div contenteditable="true" data-field="phone">9633024808</div>
                     </div>
 
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <div contenteditable="true">muhamednihal190@gmail.com</div>
+                        <div contenteditable="true" data-field="email">muhamednihal190@gmail.com</div>
                     </div>
 
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <div contenteditable="true">Nalakath(H)<br>Painkanniyoor,<br>Venmenad (PO),<br>pin : 680507
+                        <div contenteditable="true" data-field="address">Nalakath(H)<br>Painkanniyoor,<br>Venmenad
+                            (PO),<br>pin : 680507
                         </div>
                     </div>
                 </div>
 
                 <div class="sidebar-section">
-                    <div class="sidebar-title" contenteditable="true">ACADEMIC ACTIVITIES</div>
+                    <div class="sidebar-title" contenteditable="true" data-field="academicTitle">ACADEMIC ACTIVITIES
+                    </div>
                     <ul class="custom-bullets">
-                        <li contenteditable="true">Participated in the national optometry conference "EyeCon" organized
+                        <li contenteditable="true" data-field="academic_0">Participated in the national optometry
+                            conference "EyeCon" organized
                             by Vtrust Group of Institutions</li>
-                        <li contenteditable="true">Case presentation</li>
-                        <li contenteditable="true">2 year hospital posting</li>
-                        <li contenteditable="true">Participated in camps(school screening, palliative care, home care,
+                        <li contenteditable="true" data-field="academic_1">Case presentation</li>
+                        <li contenteditable="true" data-field="academic_2">2 year hospital posting</li>
+                        <li contenteditable="true" data-field="academic_3">Participated in camps(school screening,
+                            palliative care, home care,
                             professional care</li>
                     </ul>
                 </div>
 
                 <div class="sidebar-section">
-                    <div class="sidebar-title" contenteditable="true">PERSONAL DETAILS</div>
+                    <div class="sidebar-title" contenteditable="true" data-field="personalTitle">PERSONAL DETAILS</div>
                     <table class="personal-details-table">
                         <tr>
-                            <td contenteditable="true">Dob</td>
-                            <td contenteditable="true">: 23/01/2006</td>
+                            <td contenteditable="true" data-field="dobLabel">Dob</td>
+                            <td contenteditable="true" data-field="dobValue">: 23/01/2006</td>
                         </tr>
                         <tr>
-                            <td contenteditable="true">Gender</td>
-                            <td contenteditable="true">: Female</td>
+                            <td contenteditable="true" data-field="genderLabel">Gender</td>
+                            <td contenteditable="true" data-field="genderValue">: Female</td>
                         </tr>
                         <tr>
-                            <td contenteditable="true">Nationality</td>
-                            <td contenteditable="true">: Indian</td>
+                            <td contenteditable="true" data-field="nationalityLabel">Nationality</td>
+                            <td contenteditable="true" data-field="nationalityValue">: Indian</td>
                         </tr>
                         <tr>
-                            <td contenteditable="true">Marital status</td>
-                            <td contenteditable="true">: Single</td>
+                            <td contenteditable="true" data-field="maritalLabel">Marital status</td>
+                            <td contenteditable="true" data-field="maritalValue">: Single</td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="sidebar-section">
-                    <div class="sidebar-title" contenteditable="true">LANGUAGES</div>
+                    <div class="sidebar-title" contenteditable="true" data-field="languagesTitle">LANGUAGES</div>
                     <ul class="custom-bullets">
-                        <li contenteditable="true">English</li>
-                        <li contenteditable="true">Malayalam</li>
-                        <li contenteditable="true">Hindi(read and write)</li>
-                        <li contenteditable="true">Tamil</li>
+                        <li contenteditable="true" data-field="lang_0">English</li>
+                        <li contenteditable="true" data-field="lang_1">Malayalam</li>
+                        <li contenteditable="true" data-field="lang_2">Hindi(read and write)</li>
+                        <li contenteditable="true" data-field="lang_3">Tamil</li>
                     </ul>
                 </div>
 
                 <div class="sidebar-section">
-                    <div class="sidebar-title" contenteditable="true">REFERENCE</div>
-                    <div class="reference-block" contenteditable="true">
+                    <div class="sidebar-title" contenteditable="true" data-field="referenceTitle">REFERENCE</div>
+                    <div class="reference-block" contenteditable="true" data-field="referenceBlock">
                         <span class="ref-name">ANWAR SHAKEEB K</span>
                         The principal<br>
                         Rayhan college of optometry and health science<br>
@@ -684,17 +1634,17 @@
             <div class="content-area">
 
                 <div class="main-section">
-                    <div class="main-title" contenteditable="true">PROFILE</div>
-                    <div class="profile-text" contenteditable="true">
+                    <div class="main-title" contenteditable="true" data-field="profileTitle">PROFILE</div>
+                    <div class="profile-text" contenteditable="true" data-field="profileText">
                         A passionate optometry student committed to improving patients' eye health and functionality.
                         Specializes in diagnosing eye diseases and disorders to deliver efficient care.
                     </div>
                 </div>
 
                 <div class="main-section">
-                    <div class="main-title" contenteditable="true">EDUCATION</div>
+                    <div class="main-title" contenteditable="true" data-field="educationTitle">EDUCATION</div>
 
-                    <div class="edu-item" contenteditable="true">
+                    <div class="edu-item" contenteditable="true" data-field="edu_0">
                         <div class="edu-header">
                             <span class="edu-degree">Bsc.optometry</span>
                             <span class="edu-year">2023-2027</span>
@@ -702,7 +1652,7 @@
                         <div class="edu-school">Rayhan college of optometry and health science, Edappal</div>
                     </div>
 
-                    <div class="edu-item" contenteditable="true">
+                    <div class="edu-item" contenteditable="true" data-field="edu_1">
                         <div class="edu-header">
                             <span class="edu-degree">Higher secondary</span>
                             <span class="edu-year">2021-2023</span>
@@ -710,7 +1660,7 @@
                         <div class="edu-school">MASM Higher Secondary School</div>
                     </div>
 
-                    <div class="edu-item" contenteditable="true">
+                    <div class="edu-item" contenteditable="true" data-field="edu_2">
                         <div class="edu-header">
                             <span class="edu-degree">SSLC</span>
                             <span class="edu-year">2020-2021</span>
@@ -720,38 +1670,40 @@
                 </div>
 
                 <div class="main-section">
-                    <div class="main-title" contenteditable="true">CLINICAL SKILLS</div>
+                    <div class="main-title" contenteditable="true" data-field="skillsTitle">CLINICAL SKILLS</div>
                     <ul class="skills-list">
-                        <li contenteditable="true">History taking</li>
+                        <li contenteditable="true" data-field="skill_0">History taking</li>
                         <li>
-                            <span contenteditable="true">Refraction</span>
+                            <span contenteditable="true" data-field="skill_1">Refraction</span>
                             <ul class="sub-skills">
-                                <li contenteditable="true">1. subjective(trial and error, JCC,Duochrome)</li>
-                                <li contenteditable="true">2. .objective(retinoscope)</li>
+                                <li contenteditable="true" data-field="skill_1a">1. subjective(trial and error,
+                                    JCC,Duochrome)</li>
+                                <li contenteditable="true" data-field="skill_1b">2. .objective(retinoscope)</li>
                             </ul>
                         </li>
-                        <li contenteditable="true">NPA and NPC measurements</li>
-                        <li contenteditable="true">Visual Acuity measurement</li>
-                        <li contenteditable="true">Keratometer</li>
-                        <li contenteditable="true">Ocular motility test</li>
-                        <li contenteditable="true">IPD measurement</li>
-                        <li contenteditable="true">Torch light examination</li>
-                        <li contenteditable="true">Hand neutralisation</li>
-                        <li contenteditable="true">cover test</li>
-                        <li contenteditable="true">Lacrimal syringing</li>
-                        <li contenteditable="true">Confrontation</li>
-                        <li contenteditable="true">Schirmer test</li>
-                        <li contenteditable="true">prism bar</li>
-                        <li contenteditable="true">Colour vision test</li>
-                        <li contenteditable="true">+1.50 test</li>
-                        <li contenteditable="true">PBCT</li>
-                        <li contenteditable="true">Basic knowledge in A-Scan, HFA, Corneal Topography and slitlamp</li>
+                        <li contenteditable="true" data-field="skill_2">NPA and NPC measurements</li>
+                        <li contenteditable="true" data-field="skill_3">Visual Acuity measurement</li>
+                        <li contenteditable="true" data-field="skill_4">Keratometer</li>
+                        <li contenteditable="true" data-field="skill_5">Ocular motility test</li>
+                        <li contenteditable="true" data-field="skill_6">IPD measurement</li>
+                        <li contenteditable="true" data-field="skill_7">Torch light examination</li>
+                        <li contenteditable="true" data-field="skill_8">Hand neutralisation</li>
+                        <li contenteditable="true" data-field="skill_9">cover test</li>
+                        <li contenteditable="true" data-field="skill_10">Lacrimal syringing</li>
+                        <li contenteditable="true" data-field="skill_11">Confrontation</li>
+                        <li contenteditable="true" data-field="skill_12">Schirmer test</li>
+                        <li contenteditable="true" data-field="skill_13">prism bar</li>
+                        <li contenteditable="true" data-field="skill_14">Colour vision test</li>
+                        <li contenteditable="true" data-field="skill_15">+1.50 test</li>
+                        <li contenteditable="true" data-field="skill_16">PBCT</li>
+                        <li contenteditable="true" data-field="skill_17">Basic knowledge in A-Scan, HFA, Corneal
+                            Topography and slitlamp</li>
                     </ul>
                 </div>
 
                 <div class="main-section">
-                    <div class="main-title" contenteditable="true">DECLARATION</div>
-                    <div class="declaration-text" contenteditable="true">
+                    <div class="main-title" contenteditable="true" data-field="declarationTitle">DECLARATION</div>
+                    <div class="declaration-text" contenteditable="true" data-field="declarationText">
                         I Here by declare that the above mentioned information are correct and true to the best of my
                         knowledge
                     </div>
@@ -798,6 +1750,61 @@
             // Reset input so the same file can be selected again
             event.target.value = '';
         }
+
+        // Cycle through themes: classic -> modern -> modern-premium -> glass-modern -> optometric-clean -> classic
+        const themes = ['classic', 'modern-theme', 'modern-premium', 'glass-modern', 'optometric-clean'];
+        const displayNames = ['Classic', 'Modern', 'Premium', 'Glass', 'Optometric'];
+
+        function cycleTheme() {
+            let currentTheme = localStorage.getItem('cvAppTheme') || 'classic';
+            let nextIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
+            let nextTheme = themes[nextIndex];
+
+            // Remove all theme classes first
+            document.body.classList.remove(...themes.filter(t => t !== 'classic'));
+
+            // Add the new theme class if it's not classic
+            if (nextTheme !== 'classic') {
+                document.body.classList.add(nextTheme);
+            }
+
+            // Update button text
+            const btn = document.getElementById('themeSwitchBtn');
+            if (btn) {
+                btn.innerHTML = `<i class="fas fa-palette"></i> Theme: ${displayNames[nextIndex]}`;
+
+                // Change button color to match theme
+                if (nextTheme === 'classic') btn.style.backgroundColor = '#354152';
+                else if (nextTheme === 'modern-theme') btn.style.backgroundColor = '#2563EB';
+                else if (nextTheme === 'modern-premium') btn.style.backgroundColor = '#4F46E5';
+                else if (nextTheme === 'glass-modern') btn.style.backgroundColor = '#06B6D4';
+                else if (nextTheme === 'optometric-clean') btn.style.backgroundColor = '#0EA5E9';
+            }
+
+            localStorage.setItem('cvAppTheme', nextTheme);
+        }
+
+        // Load specific theme on start
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('cvAppTheme') || 'classic';
+
+            if (savedTheme !== 'classic' && themes.includes(savedTheme)) {
+                document.body.classList.add(savedTheme);
+            }
+
+            // Sync button UI on load
+            const btn = document.getElementById('themeSwitchBtn');
+            if (btn) {
+                const index = themes.indexOf(savedTheme) !== -1 ? themes.indexOf(savedTheme) : 0;
+                btn.innerHTML = `<i class="fas fa-palette"></i> Theme: ${displayNames[index]}`;
+
+                if (savedTheme === 'classic') btn.style.backgroundColor = '#354152';
+                else if (savedTheme === 'modern-theme') btn.style.backgroundColor = '#2563EB';
+                else if (savedTheme === 'modern-premium') btn.style.backgroundColor = '#4F46E5';
+                else if (savedTheme === 'glass-modern') btn.style.backgroundColor = '#06B6D4';
+                else if (savedTheme === 'optometric-clean') btn.style.backgroundColor = '#0EA5E9';
+            }
+        });
 
         function closeCropModal() {
             document.getElementById('cropModal').style.display = 'none';
@@ -905,6 +1912,78 @@
         function fallbackPrint() {
             window.print();
         }
+
+        // Handle Download All Themes
+        async function downloadAllThemes() {
+            const originalTheme = localStorage.getItem('cvAppTheme') || 'classic';
+            const hideElements = document.querySelectorAll('.hide-on-print');
+            const editables = document.querySelectorAll('[contenteditable="true"]');
+
+            // Prepare DOM for printing sequence
+            document.body.classList.add('force-desktop-layout');
+            hideElements.forEach(el => el.style.display = 'none');
+            editables.forEach(el => {
+                el.style.outline = 'none';
+                el.setAttribute('contenteditable', 'false');
+            });
+
+            const element = document.getElementById('cv-container');
+
+            let fileNameBase = 'My_CV';
+            const nameElement = document.getElementById('cv-name');
+            if (nameElement && nameElement.innerText.trim()) {
+                fileNameBase = nameElement.innerText.trim().replace(/[^a-z0-9]/gi, '_');
+            }
+
+            for (let i = 0; i < themes.length; i++) {
+                const theme = themes[i];
+
+                // Apply theme sequentially
+                document.body.classList.remove(...themes.filter(t => t !== 'classic'));
+                if (theme !== 'classic') {
+                    document.body.classList.add(theme);
+                }
+
+                // Small delay to allow CSS styles and layout to apply smoothly
+                await new Promise(r => setTimeout(r, 500));
+
+                try {
+                    const canvas = await html2canvas(element, {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        windowWidth: 794,
+                        width: 794
+                    });
+
+                    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                    const canvasWidth = canvas.width;
+                    const canvasHeight = canvas.height;
+                    const pdfWidth = 210;
+                    const pdfHeight = (canvasHeight * pdfWidth) / canvasWidth;
+
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF({
+                        orientation: pdfHeight > pdfWidth ? 'portrait' : 'landscape',
+                        unit: 'mm',
+                        format: [pdfWidth, pdfHeight]
+                    });
+
+                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                    pdf.save(`${fileNameBase}_${displayNames[i]}.pdf`);
+
+                } catch (err) {
+                    console.error(`Failed to generate PDF for ${theme}:`, err);
+                }
+            }
+
+            // Restore original theme and editing state
+            document.body.classList.remove(...themes.filter(t => t !== 'classic'));
+            if (originalTheme !== 'classic') {
+                document.body.classList.add(originalTheme);
+            }
+            restoreEditing(hideElements, editables);
+        }
     </script>
 
     <!-- Firebase Real-Time Sync (ES Module) -->
@@ -916,15 +1995,20 @@
         let isLoadingFromDB = false;
         let saveTimeout;
 
-        // Save CV data to Firebase
+        // Save all CV fields individually to Firebase
         function saveCVData() {
             if (isLoadingFromDB) return;
 
             const data = {
-                cvHTML: cvContainer.innerHTML,
-                profileImageURL: profileImage.style.backgroundImage || '',
-                lastUpdated: new Date().toISOString()
+                lastUpdated: new Date().toISOString(),
+                profileImageURL: profileImage.style.backgroundImage || ''
             };
+
+            // Collect every element with a data-field attribute
+            const fields = document.querySelectorAll('[data-field]');
+            fields.forEach(el => {
+                data[el.getAttribute('data-field')] = el.innerHTML;
+            });
 
             set(ref(database, 'cv-data'), data)
                 .then(() => console.log('CV data saved to Firebase'))
@@ -940,17 +2024,28 @@
         // Listen for any text input on editable elements
         cvContainer.addEventListener('input', debouncedSave);
 
+        // Also save when the profile image changes
+        const imgObserver = new MutationObserver(debouncedSave);
+        imgObserver.observe(profileImage, { attributes: true, attributeFilter: ['style'] });
+
         // Load CV data from Firebase on page load
         onValue(ref(database, 'cv-data'), (snapshot) => {
             const data = snapshot.val();
-            if (data && data.cvHTML) {
+            if (data) {
                 isLoadingFromDB = true;
-                cvContainer.innerHTML = data.cvHTML;
 
-                // Re-attach the profile image reference after innerHTML replacement
-                const newProfileImage = document.getElementById('profileImage');
-                if (newProfileImage && data.profileImageURL) {
-                    newProfileImage.style.backgroundImage = data.profileImageURL;
+                // Restore each field by its data-field key
+                const fields = document.querySelectorAll('[data-field]');
+                fields.forEach(el => {
+                    const key = el.getAttribute('data-field');
+                    if (data[key] !== undefined) {
+                        el.innerHTML = data[key];
+                    }
+                });
+
+                // Restore profile image
+                if (data.profileImageURL) {
+                    profileImage.style.backgroundImage = data.profileImageURL;
                 }
 
                 isLoadingFromDB = false;
