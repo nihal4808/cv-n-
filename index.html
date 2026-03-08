@@ -27,7 +27,8 @@
         }
 
         .container {
-            width: 794px;
+            max-width: 794px;
+            width: 100%;
             /* 794px represents A4 width at 96dpi */
             background: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -408,6 +409,34 @@
             [contenteditable="true"]:focus {
                 background-color: transparent !important;
                 outline: none !important;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                height: auto;
+                padding: 30px;
+                text-align: center;
+            }
+
+            .profile-img-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .main {
+                flex-direction: column;
+            }
+
+            .sidebar,
+            .content-area {
+                width: 100%;
+                padding: 25px;
+            }
+
+            .content-area {
+                padding-top: 10px;
             }
         }
     </style>
