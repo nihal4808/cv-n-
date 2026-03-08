@@ -35,6 +35,8 @@
 
         .container {
             max-width: 794px;
+            min-height: 1123px;
+            /* A4 aspect ratio height at 96dpi */
             width: 100%;
             /* 794px represents A4 width at 96dpi */
             background: white;
@@ -1486,6 +1488,72 @@
                 border: 1px solid #E0F2FE;
             }
         }
+
+        /* ========================================================
+           RESPONSIVE STYLES (Mobile View)
+           ======================================================== */
+        @media screen and (max-width: 850px) {
+            body:not(.force-desktop-layout) {
+                padding-top: 150px;
+                /* Room for fixed buttons */
+            }
+
+            body:not(.force-desktop-layout) .editor-controls {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(5px);
+                padding: 10px;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            body:not(.force-desktop-layout) .container {
+                min-height: auto;
+                /* Allow flexible height on mobile */
+                width: 100%;
+            }
+
+            body:not(.force-desktop-layout) .main {
+                flex-direction: column;
+            }
+
+            body:not(.force-desktop-layout) .sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+                padding: 20px;
+            }
+
+            body:not(.force-desktop-layout) .content-area {
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            body:not(.force-desktop-layout) .header {
+                flex-direction: column;
+                height: auto;
+                padding: 20px;
+                text-align: center;
+            }
+
+            body:not(.force-desktop-layout) .profile-img-container {
+                margin: 0 auto 20px auto;
+            }
+
+            /* Theme overrides for mobile */
+            body.optometric-clean:not(.force-desktop-layout) .container,
+            body.glass-modern:not(.force-desktop-layout) .container,
+            body.modern-premium:not(.force-desktop-layout) .container,
+            body.modern-theme:not(.force-desktop-layout) .container {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 
@@ -1506,14 +1574,13 @@
     </div>
 
     <div class="editor-controls hide-on-print" id="downloadBtnContainer">
-        <button class="btn" id="themeSwitchBtn" style="background-color: #4F46E5; margin-bottom: 10px;"
-            onclick="cycleTheme()">
+        <button class="btn" id="themeSwitchBtn" style="background-color: #4F46E5;" onclick="cycleTheme()">
             <i class="fas fa-palette"></i> Theme: Classic
         </button>
         <button class="btn" onclick="downloadPDF()">
             <i class="fas fa-download"></i> Download as PDF
         </button>
-        <button class="btn" style="background-color: #059669; margin-top: 10px;" onclick="downloadAllThemes()">
+        <button class="btn" style="background-color: #059669;" onclick="downloadAllThemes()">
             <i class="fas fa-file-pdf"></i> Download All Themes
         </button>
     </div>
@@ -1832,14 +1899,14 @@
 
         // Handle PDF Download
         function downloadPDF() {
-            // Force desktop layout before rendering
+            // Force Desktop Layout for html2canvas
             document.body.classList.add('force-desktop-layout');
 
-            // Hide elements that shouldn't be in the PDF
+            // Hide buttons before capturing
             const hideElements = document.querySelectorAll('.hide-on-print');
             hideElements.forEach(el => el.style.display = 'none');
 
-            // Temporarily disable editing outlines
+            // Remove borders/backgrounds from contenteditable for a cleaner PDF
             const editables = document.querySelectorAll('[contenteditable="true"]');
             editables.forEach(el => {
                 el.style.outline = 'none';
