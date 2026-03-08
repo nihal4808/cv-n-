@@ -413,6 +413,14 @@
         }
 
         /* Override media queries for PDF generation */
+        body.force-desktop-layout .container {
+            width: 794px !important;
+            max-width: none !important;
+            margin: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
         body.force-desktop-layout .header {
             flex-direction: row !important;
             height: 200px !important;
@@ -703,7 +711,8 @@
                 scale: 2,
                 useCORS: true,
                 logging: false,
-                windowWidth: 1000 // Trick html2canvas into seeing a wide window
+                windowWidth: 794,
+                width: 794
             });
 
             // Fallback timeout in case html2canvas hangs (e.g. CORS issues)
