@@ -375,6 +375,8 @@
             align-items: center;
             gap: 10px;
             transition: transform 0.2s, background-color 0.2s;
+            white-space: nowrap;
+            /* Prevent icon and text from wrapping */
         }
 
         .btn:hover {
@@ -1502,17 +1504,26 @@
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 10px;
+                gap: 8px;
                 /* Added gap for better button spacing */
                 top: 0;
                 left: 0;
                 right: 0;
+                bottom: auto;
+                /* override bottom from desktop */
                 width: 100%;
                 background: rgba(255, 255, 255, 0.95);
                 backdrop-filter: blur(5px);
                 padding: 10px;
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
                 border-bottom: 1px solid #e5e7eb;
+                z-index: 2000;
+            }
+
+            body:not(.force-desktop-layout) .editor-controls .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+                gap: 5px;
             }
 
             body:not(.force-desktop-layout) .container {
