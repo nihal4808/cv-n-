@@ -907,6 +907,58 @@
         }
     </script>
 
+    <!-- Firebase Real-Time Sync (ES Module) -->
+    <script type="module">
+        import { database, ref, set, onValue } from './firebase-config.js';
+
+        const cvContainer = document.getElementById('cv-container');
+        const profileImage = document.getElementById('profileImage');
+        let isLoadingFromDB = false;
+        let saveTimeout;
+
+        // Save CV data to Firebase
+        function saveCVData() {
+            if (isLoadingFromDB) return;
+
+            const data = {
+                cvHTML: cvContainer.innerHTML,
+                profileImageURL: profileImage.style.backgroundImage || '',
+                lastUpdated: new Date().toISOString()
+            };
+
+            set(ref(database, 'cv-data'), data)
+                .then(() => console.log('CV data saved to Firebase'))
+                .catch(err => console.error('Firebase save error:', err));
+        }
+
+        // Debounced save — waits 1.5s after last edit before saving
+        function debouncedSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveCVData, 1500);
+        }
+
+        // Listen for any text input on editable elements
+        cvContainer.addEventListener('input', debouncedSave);
+
+        // Load CV data from Firebase on page load
+        onValue(ref(database, 'cv-data'), (snapshot) => {
+            const data = snapshot.val();
+            if (data && data.cvHTML) {
+                isLoadingFromDB = true;
+                cvContainer.innerHTML = data.cvHTML;
+
+                // Re-attach the profile image reference after innerHTML replacement
+                const newProfileImage = document.getElementById('profileImage');
+                if (newProfileImage && data.profileImageURL) {
+                    newProfileImage.style.backgroundImage = data.profileImageURL;
+                }
+
+                isLoadingFromDB = false;
+                console.log('CV data loaded from Firebase');
+            }
+        }, { onlyOnce: true }); // Load only once on page open
+    </script>
+
 </body>
 
 </html>
