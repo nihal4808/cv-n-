@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable CV Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- html2canvas + jsPDF for downloading the CV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background: #525659;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 794px;
+            /* 794px represents A4 width at 96dpi */
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border: 6px solid white;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* HEADER */
+        .header {
+            background-color: #354152;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            padding: 0 35px;
+        }
+
+        .profile-img-container {
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+            border: 6px solid white;
+            margin-right: 35px;
+            background-color: #e4e6eb;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .profile-img-container:hover .profile-img-overlay {
+            opacity: 1;
+        }
+
+        .header-info {
+            flex: 1;
+            color: white;
+            margin-top: 5px;
+        }
+
+        .header-info h1 {
+            font-size: 34px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            outline: none;
+        }
+
+        .header-info h2 {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #d1d5db;
+            outline: none;
+        }
+
+        /* MAIN LAYOUT */
+        .main {
+            display: flex;
+            flex: 1;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 35%;
+            background-color: #e4e6eb;
+            padding: 35px 30px;
+            font-size: 11px;
+            color: #333;
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-title {
+            color: #354152;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #b4b9c1;
+            outline: none;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .contact-item i {
+            width: 20px;
+            margin-top: 2px;
+            color: #354152;
+            font-size: 12px;
+        }
+
+        .contact-item div {
+            flex: 1;
+            word-break: break-word;
+            outline: none;
+        }
+
+        .sidebar ul.custom-bullets {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul.custom-bullets li {
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .sidebar ul.custom-bullets li::before {
+            content: "■";
+            font-size: 7px;
+            color: #354152;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .personal-details-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .personal-details-table td {
+            padding-bottom: 5px;
+            vertical-align: top;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .personal-details-table td:first-child {
+            width: 42%;
+        }
+
+        .reference-block {
+            line-height: 1.4;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .reference-block .ref-name {
+            font-weight: 700;
+            font-size: 12px;
+            color: #354152;
+            margin-bottom: 2px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .reference-block .ref-strong {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .reference-block .ref-phone-email {
+            margin-top: 8px;
+        }
+
+        .reference-block .ref-phone-email div {
+            margin-bottom: 2px;
+        }
+
+        /* CONTENT AREA */
+        .content-area {
+            width: 65%;
+            padding: 35px 35px 35px 40px;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .main-section {
+            margin-bottom: 25px;
+        }
+
+        .main-title {
+            display: flex;
+            align-items: center;
+            color: #354152;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .main-title::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1.5px solid #aeb3bc;
+            margin-left: 15px;
+        }
+
+        .profile-text {
+            line-height: 1.6;
+            font-weight: 500;
+            outline: none;
+        }
+
+        /* EDUCATION */
+        .edu-item {
+            margin-bottom: 14px;
+            line-height: 1.4;
+            outline: none;
+        }
+
+        .edu-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2px;
+        }
+
+        .edu-degree {
+            font-weight: 700;
+            color: #333;
+            font-size: 12px;
+        }
+
+        .edu-year {
+            font-weight: 500;
+            color: #444;
+        }
+
+        .edu-school {
+            font-weight: 500;
+        }
+
+        /* CLINICAL SKILLS */
+        .skills-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skills-list>li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 5px;
+            line-height: 1.4;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .skills-list>li::before {
+            content: "◆";
+            font-size: 9px;
+            color: #354152;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .sub-skills {
+            list-style-type: none;
+            padding-left: 14px;
+            margin-top: 3px;
+            margin-bottom: 3px;
+        }
+
+        .sub-skills>li {
+            margin-bottom: 2px;
+            font-weight: 500;
+            position: relative;
+            outline: none;
+        }
+
+        .declaration-text {
+            line-height: 1.6;
+            margin-top: 10px;
+            font-weight: 500;
+            outline: none;
+        }
+
+        /* EDITOR UI */
+        .editor-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .btn {
+            background-color: #354152;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #2a3441;
+            transform: translateY(-2px);
+        }
+
+        [contenteditable="true"]:hover {
+            background-color: rgba(255, 255, 0, 0.1);
+            outline: 1px dashed #354152 !important;
+        }
+
+        [contenteditable="true"]:focus {
+            background-color: rgba(255, 255, 0, 0.2);
+            outline: 2px solid #354152 !important;
+        }
+
+        #imageUpload {
+            display: none;
+        }
+
+        /* Hide elements during PDF generation */
+        .hide-on-print {
+            display: flex !important;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                width: 100%;
+            }
+
+            .hide-on-print {
+                display: none !important;
+            }
+
+            [contenteditable="true"]:hover,
+            [contenteditable="true"]:focus {
+                background-color: transparent !important;
+                outline: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="editor-controls hide-on-print" id="downloadBtnContainer">
+        <button class="btn" onclick="downloadPDF()">
+            <i class="fas fa-download"></i> Download as PDF
+        </button>
+    </div>
+
+    <!-- This specific ID tells html2pdf what area to export -->
+    <div class="container" id="cv-container">
+
+        <!-- HEADER -->
+        <div class="header">
+
+            <!-- Editable Image Container -->
+            <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
+            <div class="profile-img-container" onclick="document.getElementById('imageUpload').click();">
+                <img src="photo.jpg" id="profileImage" alt="Profile Picture"
+                    onerror="this.src='https://via.placeholder.com/135?text=Upload+Photo'">
+                <div class="profile-img-overlay hide-on-print">
+                    <span><i class="fas fa-camera"></i> Change</span>
+                </div>
+            </div>
+
+            <div class="header-info">
+                <h1 contenteditable="true">NAFIYA NM</h1>
+                <h2 contenteditable="true">OPTOMETRY STUDENT</h2>
+            </div>
+        </div>
+
+        <div class="main">
+
+            <!-- LEFT SIDEBAR -->
+            <div class="sidebar">
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title" contenteditable="true">CONTACT</div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div contenteditable="true">7736644955</div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div contenteditable="true">www.nafiyamuhammod@gmail.com</div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div contenteditable="true">Nalakath(H)<br>Painkanniyoor,<br>Venmenad (PO),<br>pin : 680507
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title" contenteditable="true">ACADEMIC ACTIVITIES</div>
+                    <ul class="custom-bullets">
+                        <li contenteditable="true">Participated in the national optometry conference "EyeCon" organized
+                            by Vtrust Group of Institutions</li>
+                        <li contenteditable="true">Case presentation</li>
+                        <li contenteditable="true">2 year hospital posting</li>
+                        <li contenteditable="true">Participated in camps(school screening, palliative care, home care,
+                            professional care</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title" contenteditable="true">PERSONAL DETAILS</div>
+                    <table class="personal-details-table">
+                        <tr>
+                            <td contenteditable="true">Dob</td>
+                            <td contenteditable="true">: 23/01/2006</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable="true">Gender</td>
+                            <td contenteditable="true">: Female</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable="true">Nationality</td>
+                            <td contenteditable="true">: Indian</td>
+                        </tr>
+                        <tr>
+                            <td contenteditable="true">Marital status</td>
+                            <td contenteditable="true">: Single</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title" contenteditable="true">LANGUAGES</div>
+                    <ul class="custom-bullets">
+                        <li contenteditable="true">English</li>
+                        <li contenteditable="true">Malayalam</li>
+                        <li contenteditable="true">Hindi(read and write)</li>
+                        <li contenteditable="true">Tamil</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title" contenteditable="true">REFERENCE</div>
+                    <div class="reference-block" contenteditable="true">
+                        <span class="ref-name">ANWAR SHAKEEB K</span>
+                        The principal<br>
+                        Rayhan college of optometry and health science<br>
+                        Edappal, Malappuram
+                        <div class="ref-phone-email">
+                            <div><strong class="ref-strong">Phone :</strong> 9846409242</div>
+                            <div><strong class="ref-strong">Email :</strong>Rayhanhospital@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT CONTENT -->
+            <div class="content-area">
+
+                <div class="main-section">
+                    <div class="main-title" contenteditable="true">PROFILE</div>
+                    <div class="profile-text" contenteditable="true">
+                        A passionate optometry student committed to improving patients' eye health and functionality.
+                        Specializes in diagnosing eye diseases and disorders to deliver efficient care.
+                    </div>
+                </div>
+
+                <div class="main-section">
+                    <div class="main-title" contenteditable="true">EDUCATION</div>
+
+                    <div class="edu-item" contenteditable="true">
+                        <div class="edu-header">
+                            <span class="edu-degree">Bsc.optometry</span>
+                            <span class="edu-year">2023-2027</span>
+                        </div>
+                        <div class="edu-school">Rayhan college of optometry and health science, Edappal</div>
+                    </div>
+
+                    <div class="edu-item" contenteditable="true">
+                        <div class="edu-header">
+                            <span class="edu-degree">Higher secondary</span>
+                            <span class="edu-year">2021-2023</span>
+                        </div>
+                        <div class="edu-school">MASM Higher Secondary School</div>
+                    </div>
+
+                    <div class="edu-item" contenteditable="true">
+                        <div class="edu-header">
+                            <span class="edu-degree">SSLC</span>
+                            <span class="edu-year">2020-2021</span>
+                        </div>
+                        <div class="edu-school">CHRIST KING COVENT SCHOOL PAVARATTY</div>
+                    </div>
+                </div>
+
+                <div class="main-section">
+                    <div class="main-title" contenteditable="true">CLINICAL SKILLS</div>
+                    <ul class="skills-list">
+                        <li contenteditable="true">History taking</li>
+                        <li>
+                            <span contenteditable="true">Refraction</span>
+                            <ul class="sub-skills">
+                                <li contenteditable="true">1. subjective(trial and error, JCC,Duochrome)</li>
+                                <li contenteditable="true">2. .objective(retinoscope)</li>
+                            </ul>
+                        </li>
+                        <li contenteditable="true">NPA and NPC measurements</li>
+                        <li contenteditable="true">Visual Acuity measurement</li>
+                        <li contenteditable="true">Keratometer</li>
+                        <li contenteditable="true">Ocular motility test</li>
+                        <li contenteditable="true">IPD measurement</li>
+                        <li contenteditable="true">Torch light examination</li>
+                        <li contenteditable="true">Hand neutralisation</li>
+                        <li contenteditable="true">cover test</li>
+                        <li contenteditable="true">Lacrimal syringing</li>
+                        <li contenteditable="true">Confrontation</li>
+                        <li contenteditable="true">Schirmer test</li>
+                        <li contenteditable="true">prism bar</li>
+                        <li contenteditable="true">Colour vision test</li>
+                        <li contenteditable="true">+1.50 test</li>
+                        <li contenteditable="true">PBCT</li>
+                        <li contenteditable="true">Basic knowledge in A-Scan, HFA, Corneal Topography and slitlamp</li>
+                    </ul>
+                </div>
+
+                <div class="main-section">
+                    <div class="main-title" contenteditable="true">DECLARATION</div>
+                    <div class="declaration-text" contenteditable="true">
+                        I Here by declare that the above mentioned information are correct and true to the best of my
+                        knowledge
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Handle Image Upload and Preview
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('profileImage');
+                output.src = reader.result;
+            }
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        // Handle PDF Download
+        function downloadPDF() {
+            // Hide elements that shouldn't be in the PDF
+            const hideElements = document.querySelectorAll('.hide-on-print');
+            hideElements.forEach(el => el.style.display = 'none');
+
+            // Temporarily disable editing outlines
+            const editables = document.querySelectorAll('[contenteditable="true"]');
+            editables.forEach(el => {
+                el.style.outline = 'none';
+                el.setAttribute('contenteditable', 'false');
+            });
+
+            const element = document.getElementById('cv-container');
+
+            // Use html2canvas to capture the full CV as a single image
+            html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                logging: false
+            }).then(function (canvas) {
+                const imgData = canvas.toDataURL('image/jpeg', 0.98);
+
+                // Get the canvas dimensions
+                const canvasWidth = canvas.width;
+                const canvasHeight = canvas.height;
+
+                // Calculate PDF page size in mm to match the aspect ratio
+                // Use A4 width (210mm) as base and calculate height proportionally
+                const pdfWidth = 210;
+                const pdfHeight = (canvasHeight * pdfWidth) / canvasWidth;
+
+                // Create a single-page PDF with the exact dimensions
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: pdfHeight > pdfWidth ? 'portrait' : 'landscape',
+                    unit: 'mm',
+                    format: [pdfWidth, pdfHeight]
+                });
+
+                // Place the full CV image on the single page
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('My_CV.pdf');
+
+                restoreEditing(hideElements, editables);
+            }).catch(function (err) {
+                console.error('PDF generation error:', err);
+                restoreEditing(hideElements, editables);
+                fallbackPrint();
+            });
+        }
+
+        function restoreEditing(hideElements, editables) {
+            hideElements.forEach(el => el.style.display = '');
+            editables.forEach(el => {
+                el.setAttribute('contenteditable', 'true');
+                el.style.outline = '';
+            });
+        }
+
+        function fallbackPrint() {
+            window.print();
+        }
+    </script>
+
+</body>
+
+</html>
