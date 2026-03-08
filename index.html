@@ -61,10 +61,13 @@
             cursor: pointer;
         }
 
-        .profile-img-container img {
+        .profile-img-container .img-preview {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
         }
 
         .profile-img-overlay {
@@ -494,8 +497,9 @@
             <!-- Editable Image Container -->
             <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
             <div class="profile-img-container" onclick="document.getElementById('imageUpload').click();">
-                <img src="photo.jpg" id="profileImage" alt="Profile Picture"
-                    onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'135\' height=\'135\'><rect width=\'135\' height=\'135\' fill=\'%23cccccc\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'14\' fill=\'%23333333\'>Upload Photo</text></svg>'">
+                <div class="img-preview" id="profileImage"
+                    style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'135\' height=\'135\'><rect width=\'135\' height=\'135\' fill=\'%23cccccc\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'14\' fill=\'%23333333\'>Upload Photo</text></svg>');">
+                </div>
                 <div class="profile-img-overlay hide-on-print">
                     <span><i class="fas fa-camera"></i> Change</span>
                 </div>
@@ -681,7 +685,7 @@
             var reader = new FileReader();
             reader.onload = function () {
                 var output = document.getElementById('profileImage');
-                output.src = reader.result;
+                output.style.backgroundImage = `url('${reader.result}')`;
             }
             if (event.target.files[0]) {
                 reader.readAsDataURL(event.target.files[0]);
