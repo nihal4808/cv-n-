@@ -467,7 +467,7 @@
             </div>
 
             <div class="header-info">
-                <h1 contenteditable="true">NAFIYA NM</h1>
+                <h1 id="cv-name" contenteditable="true">NAFIYA NM</h1>
                 <h2 contenteditable="true">OPTOMETRY STUDENT</h2>
             </div>
         </div>
@@ -695,7 +695,13 @@
 
                 // Place the full CV image on the single page
                 pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save('My_CV.pdf');
+
+                let fileName = 'My_CV';
+                const nameElement = document.getElementById('cv-name');
+                if (nameElement && nameElement.innerText.trim()) {
+                    fileName = nameElement.innerText.trim().replace(/[^a-z0-9]/gi, '_');
+                }
+                pdf.save(`${fileName}.pdf`);
 
                 restoreEditing(hideElements, editables);
             }).catch(function (err) {
