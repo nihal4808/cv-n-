@@ -105,21 +105,22 @@
         }
 
         .header-info h1 {
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 700;
             margin: 0 0 8px 0;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             outline: none;
         }
 
         .header-info h2 {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             margin: 0;
             color: #d1d5db;
             outline: none;
+            text-transform: uppercase;
         }
 
         /* MAIN LAYOUT */
@@ -131,39 +132,42 @@
         /* SIDEBAR */
         .sidebar {
             width: 35%;
-            background-color: #e4e6eb;
-            padding: 35px 30px;
+            background-color: #edf0f4;
+            padding: 35px 28px;
             font-size: 11px;
-            color: #333;
+            color: #444;
+            line-height: 1.5;
         }
 
         .sidebar-section {
-            margin-bottom: 25px;
+            margin-bottom: 22px;
         }
 
         .sidebar-title {
             color: #354152;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             margin-bottom: 12px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #b4b9c1;
+            padding-bottom: 6px;
+            border-bottom: 1.5px solid #b4b9c1;
             outline: none;
+            text-transform: uppercase;
         }
 
         .contact-item {
             display: flex;
-            margin-bottom: 12px;
-            line-height: 1.4;
+            margin-bottom: 10px;
+            line-height: 1.5;
             font-weight: 500;
         }
 
         .contact-item i {
             width: 20px;
-            margin-top: 2px;
+            margin-top: 3px;
             color: #354152;
-            font-size: 12px;
+            font-size: 11px;
+            flex-shrink: 0;
         }
 
         .contact-item div {
@@ -180,16 +184,16 @@
 
         .sidebar ul.custom-bullets li {
             position: relative;
-            padding-left: 12px;
-            margin-bottom: 8px;
-            line-height: 1.4;
+            padding-left: 14px;
+            margin-bottom: 7px;
+            line-height: 1.5;
             font-weight: 500;
             outline: none;
         }
 
         .sidebar ul.custom-bullets li::before {
-            content: "■";
-            font-size: 7px;
+            content: "▪";
+            font-size: 8px;
             color: #354152;
             position: absolute;
             left: 0;
@@ -213,53 +217,75 @@
         }
 
         .reference-block {
-            line-height: 1.4;
+            line-height: 1.5;
             font-weight: 500;
             outline: none;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d0d4da;
+        }
+
+        .reference-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .reference-block .ref-name {
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11.5px;
             color: #354152;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
             display: block;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reference-block .ref-title {
+            font-weight: 600;
+            font-size: 10.5px;
+            color: #555;
+            display: block;
+            margin-bottom: 2px;
         }
 
         .reference-block .ref-strong {
-            font-weight: 700;
-            color: #333;
+            font-weight: 600;
+            color: #444;
+            font-size: 10.5px;
         }
 
         .reference-block .ref-phone-email {
-            margin-top: 8px;
+            margin-top: 5px;
         }
 
         .reference-block .ref-phone-email div {
             margin-bottom: 2px;
+            font-size: 10.5px;
         }
 
         /* CONTENT AREA */
         .content-area {
             width: 65%;
-            padding: 35px 35px 35px 40px;
-            font-size: 12px;
+            padding: 30px 35px 30px 35px;
+            font-size: 11.5px;
             color: #333;
+            line-height: 1.5;
         }
 
         .main-section {
-            margin-bottom: 25px;
+            margin-bottom: 22px;
         }
 
         .main-title {
             display: flex;
             align-items: center;
             color: #354152;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+            letter-spacing: 2.5px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
             outline: none;
         }
 
@@ -274,19 +300,30 @@
             line-height: 1.6;
             font-weight: 500;
             outline: none;
+            font-size: 11.5px;
+            color: #444;
         }
 
         /* EDUCATION */
         .edu-item {
-            margin-bottom: 14px;
-            line-height: 1.4;
+            margin-bottom: 16px;
+            line-height: 1.5;
             outline: none;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .edu-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
         }
 
         .edu-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 2px;
+            align-items: baseline;
+            margin-bottom: 3px;
         }
 
         .edu-degree {
@@ -296,12 +333,16 @@
         }
 
         .edu-year {
-            font-weight: 500;
-            color: #444;
+            font-weight: 600;
+            color: #354152;
+            font-size: 11px;
+            letter-spacing: 0.5px;
         }
 
         .edu-school {
             font-weight: 500;
+            color: #555;
+            font-size: 11px;
         }
 
         /* CLINICAL SKILLS */
@@ -314,40 +355,44 @@
         .skills-list>li {
             position: relative;
             padding-left: 16px;
-            margin-bottom: 5px;
-            line-height: 1.4;
+            margin-bottom: 6px;
+            line-height: 1.5;
             font-weight: 500;
             outline: none;
         }
 
         .skills-list>li::before {
             content: "◆";
-            font-size: 9px;
+            font-size: 7px;
             color: #354152;
             position: absolute;
             left: 0;
-            top: 2px;
+            top: 4px;
         }
 
         .sub-skills {
             list-style-type: none;
-            padding-left: 14px;
-            margin-top: 3px;
-            margin-bottom: 3px;
+            padding-left: 16px;
+            margin-top: 4px;
+            margin-bottom: 4px;
         }
 
         .sub-skills>li {
-            margin-bottom: 2px;
+            margin-bottom: 3px;
             font-weight: 500;
             position: relative;
             outline: none;
+            font-size: 11px;
+            color: #555;
         }
 
         .declaration-text {
             line-height: 1.6;
-            margin-top: 10px;
+            margin-top: 8px;
             font-weight: 500;
             outline: none;
+            font-size: 11px;
+            color: #444;
         }
 
         /* EDITOR UI */
@@ -1639,8 +1684,8 @@
 
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <div contenteditable="true" data-field="address">Nalakath(H)<br>Painkanniyoor,<br>Venmenad
-                            (PO),<br>pin : 680507
+                        <div contenteditable="true" data-field="address">Nalakath (H),<br>Painkanniyoor,<br>Venmenad
+                            (PO),<br>Pin: 680507
                         </div>
                     </div>
                 </div>
@@ -1649,15 +1694,16 @@
                     <div class="sidebar-title" contenteditable="true" data-field="academicTitle">ACADEMIC ACTIVITIES
                     </div>
                     <ul class="custom-bullets">
-                        <li contenteditable="true" data-field="academic_0">Participated in the national optometry
-                            conference "EyeCon" organized
+                        <li contenteditable="true" data-field="academic_0">Participated in the National Optometry
+                            Conference "EyeCon" organised
                             by Vtrust Group of Institutions</li>
                         <li contenteditable="true" data-field="academic_1">Case presentation</li>
-                        <li contenteditable="true" data-field="academic_2">2 year hospital posting</li>
-                        <li contenteditable="true" data-field="academic_3">Participated in camps(school screening,
+                        <li contenteditable="true" data-field="academic_2">2-year hospital posting</li>
+                        <li contenteditable="true" data-field="academic_3">Participated in camps (school screening,
                             palliative care, home care,
-                            professional care</li>
-                        <li contenteditable="true" data-field="academic_4">IACLE student training classes ongoing</li>
+                            professional care)</li>
+                        <li contenteditable="true" data-field="academic_4">IACLE Student Training Programme (Ongoing)
+                        </li>
                     </ul>
                 </div>
 
@@ -1665,7 +1711,7 @@
                     <div class="sidebar-title" contenteditable="true" data-field="personalTitle">PERSONAL DETAILS</div>
                     <table class="personal-details-table">
                         <tr>
-                            <td contenteditable="true" data-field="dobLabel">Dob</td>
+                            <td contenteditable="true" data-field="dobLabel">Date of Birth</td>
                             <td contenteditable="true" data-field="dobValue">: 23/01/2006</td>
                         </tr>
                         <tr>
@@ -1677,7 +1723,7 @@
                             <td contenteditable="true" data-field="nationalityValue">: Indian</td>
                         </tr>
                         <tr>
-                            <td contenteditable="true" data-field="maritalLabel">Marital status</td>
+                            <td contenteditable="true" data-field="maritalLabel">Marital Status</td>
                             <td contenteditable="true" data-field="maritalValue">: Single</td>
                         </tr>
                     </table>
@@ -1688,7 +1734,7 @@
                     <ul class="custom-bullets">
                         <li contenteditable="true" data-field="lang_0">English</li>
                         <li contenteditable="true" data-field="lang_1">Malayalam</li>
-                        <li contenteditable="true" data-field="lang_2">Hindi(read and write)</li>
+                        <li contenteditable="true" data-field="lang_2">Hindi (read and write)</li>
                         <li contenteditable="true" data-field="lang_3">Tamil</li>
                     </ul>
                 </div>
@@ -1697,22 +1743,21 @@
                     <div class="sidebar-title" contenteditable="true" data-field="referenceTitle">REFERENCE</div>
                     <div class="reference-block" contenteditable="true" data-field="referenceBlock">
                         <span class="ref-name">ANWAR SHAKEEB K</span>
-                        The principal<br>
-                        Rayhan college of optometry and health science<br>
+                        <span class="ref-title">Principal</span>
+                        Rayhan College of Optometry and Health Sciences<br>
                         Edappal, Malappuram
                         <div class="ref-phone-email">
-                            <div><strong class="ref-strong">Phone :</strong> 9846409242</div>
-                            <div><strong class="ref-strong">Email :</strong>Rayhanhospital@gmail.com</div>
+                            <div><strong class="ref-strong">Phone:</strong> +91 9846409242</div>
+                            <div><strong class="ref-strong">Email:</strong> Rayhanhospital@gmail.com</div>
                         </div>
                     </div>
-                    <div class="reference-block" contenteditable="true" data-field="referenceBlock2"
-                        style="margin-top: 12px;">
+                    <div class="reference-block" contenteditable="true" data-field="referenceBlock2">
                         <span class="ref-name">ASHWATHI SR</span>
-                        Head Of Optometry Department<br>
-                        Rayhan College Of Optometry And Health Science<br>
+                        <span class="ref-title">Head of Optometry Department</span>
+                        Rayhan College of Optometry and Health Sciences<br>
                         Edappal, Malappuram
                         <div class="ref-phone-email">
-                            <div><strong class="ref-strong">Phone :</strong> 9645626192</div>
+                            <div><strong class="ref-strong">Phone:</strong> +91 9645626192</div>
                         </div>
                     </div>
                 </div>
@@ -1725,8 +1770,9 @@
                 <div class="main-section">
                     <div class="main-title" contenteditable="true" data-field="profileTitle">PROFILE</div>
                     <div class="profile-text" contenteditable="true" data-field="profileText">
-                        A passionate optometry student committed to improving patients' eye health and functionality.
-                        Specializes in diagnosing eye diseases and disorders to deliver efficient care.
+                        A passionate optometry student committed to improving patients' eye health and visual
+                        functionality. Skilled in diagnosing eye diseases and disorders to deliver efficient,
+                        patient-centred care.
                     </div>
                 </div>
 
@@ -1735,16 +1781,16 @@
 
                     <div class="edu-item" contenteditable="true" data-field="edu_0">
                         <div class="edu-header">
-                            <span class="edu-degree">Bsc.optometry</span>
-                            <span class="edu-year">2023-2027</span>
+                            <span class="edu-degree">B.Sc. Optometry</span>
+                            <span class="edu-year">2023 – 2027</span>
                         </div>
-                        <div class="edu-school">Rayhan college of optometry and health science, Edappal</div>
+                        <div class="edu-school">Rayhan College of Optometry and Health Sciences, Edappal</div>
                     </div>
 
                     <div class="edu-item" contenteditable="true" data-field="edu_1">
                         <div class="edu-header">
-                            <span class="edu-degree">Higher secondary</span>
-                            <span class="edu-year">2021-2023</span>
+                            <span class="edu-degree">Higher Secondary</span>
+                            <span class="edu-year">2021 – 2023</span>
                         </div>
                         <div class="edu-school">MASM Higher Secondary School</div>
                     </div>
@@ -1752,49 +1798,49 @@
                     <div class="edu-item" contenteditable="true" data-field="edu_2">
                         <div class="edu-header">
                             <span class="edu-degree">SSLC</span>
-                            <span class="edu-year">2020-2021</span>
+                            <span class="edu-year">2020 – 2021</span>
                         </div>
-                        <div class="edu-school">CHRIST KING COVENT SCHOOL PAVARATTY</div>
+                        <div class="edu-school">Christ King Convent School, Pavaratty</div>
                     </div>
                 </div>
 
                 <div class="main-section">
                     <div class="main-title" contenteditable="true" data-field="skillsTitle">CLINICAL SKILLS</div>
                     <ul class="skills-list">
-                        <li contenteditable="true" data-field="skill_0">History taking</li>
+                        <li contenteditable="true" data-field="skill_0">History Taking</li>
                         <li>
                             <span contenteditable="true" data-field="skill_1">Refraction</span>
                             <ul class="sub-skills">
-                                <li contenteditable="true" data-field="skill_1a">1. subjective(trial and error,
-                                    JCC,Duochrome)</li>
-                                <li contenteditable="true" data-field="skill_1b">2. .objective(retinoscope)</li>
+                                <li contenteditable="true" data-field="skill_1a">Subjective (Trial and Error,
+                                    JCC, Duochrome)</li>
+                                <li contenteditable="true" data-field="skill_1b">Objective (Retinoscopy)</li>
                             </ul>
                         </li>
-                        <li contenteditable="true" data-field="skill_2">NPA and NPC measurements</li>
-                        <li contenteditable="true" data-field="skill_3">Visual Acuity measurement</li>
-                        <li contenteditable="true" data-field="skill_4">Keratometer</li>
-                        <li contenteditable="true" data-field="skill_5">Ocular motility test</li>
-                        <li contenteditable="true" data-field="skill_6">IPD measurement</li>
-                        <li contenteditable="true" data-field="skill_7">Torch light examination</li>
-                        <li contenteditable="true" data-field="skill_8">Hand neutralisation</li>
-                        <li contenteditable="true" data-field="skill_9">cover test</li>
-                        <li contenteditable="true" data-field="skill_10">Lacrimal syringing</li>
-                        <li contenteditable="true" data-field="skill_11">Confrontation</li>
-                        <li contenteditable="true" data-field="skill_12">Schirmer test</li>
-                        <li contenteditable="true" data-field="skill_13">prism bar</li>
-                        <li contenteditable="true" data-field="skill_14">Colour vision test</li>
-                        <li contenteditable="true" data-field="skill_15">+1.50 test</li>
+                        <li contenteditable="true" data-field="skill_2">NPA and NPC Measurements</li>
+                        <li contenteditable="true" data-field="skill_3">Visual Acuity Measurement</li>
+                        <li contenteditable="true" data-field="skill_4">Keratometry</li>
+                        <li contenteditable="true" data-field="skill_5">Ocular Motility Test</li>
+                        <li contenteditable="true" data-field="skill_6">IPD Measurement</li>
+                        <li contenteditable="true" data-field="skill_7">Torch Light Examination</li>
+                        <li contenteditable="true" data-field="skill_8">Hand Neutralisation</li>
+                        <li contenteditable="true" data-field="skill_9">Cover Test</li>
+                        <li contenteditable="true" data-field="skill_10">Lacrimal Syringing</li>
+                        <li contenteditable="true" data-field="skill_11">Confrontation Test</li>
+                        <li contenteditable="true" data-field="skill_12">Schirmer Test</li>
+                        <li contenteditable="true" data-field="skill_13">Prism Bar</li>
+                        <li contenteditable="true" data-field="skill_14">Colour Vision Test</li>
+                        <li contenteditable="true" data-field="skill_15">+1.50 Test</li>
                         <li contenteditable="true" data-field="skill_16">PBCT</li>
-                        <li contenteditable="true" data-field="skill_17">Basic knowledge in A-Scan, HFA, Corneal
-                            Topography and slitlamp</li>
+                        <li contenteditable="true" data-field="skill_17">Basic Knowledge in A-Scan, HFA, Corneal
+                            Topography, and Slit Lamp</li>
                     </ul>
                 </div>
 
                 <div class="main-section">
                     <div class="main-title" contenteditable="true" data-field="declarationTitle">DECLARATION</div>
                     <div class="declaration-text" contenteditable="true" data-field="declarationText">
-                        I Here by declare that the above mentioned information are correct and true to the best of my
-                        knowledge
+                        I hereby declare that the above-mentioned information is correct and true to the best of my
+                        knowledge.
                     </div>
                 </div>
 
