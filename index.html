@@ -34,15 +34,13 @@
         }
 
         .container {
-            max-width: 794px;
-            min-height: 1123px;
-            /* A4 aspect ratio height at 96dpi */
-            width: 100%;
-            /* 794px represents A4 width at 96dpi */
+            width: 210mm;
+            min-height: 297mm;
+            /* Exact A4 dimensions */
+            margin: auto;
             background: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             border: 1px solid #E5E7EB;
-            /* Added thin border */
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -1939,13 +1937,17 @@
 
             const element = document.getElementById('cv-container');
 
+            // A4 dimensions in mm
+            const A4_WIDTH = 210;
+            const A4_HEIGHT = 297;
+
             // Use html2canvas to capture the full CV as a single image
             const renderPromise = html2canvas(element, {
                 scale: 2,
                 useCORS: true,
                 logging: false,
-                windowWidth: 794,
-                width: 794
+                windowWidth: element.scrollWidth,
+                width: element.scrollWidth
             });
 
             // Fallback timeout in case html2canvas hangs (e.g. CORS issues)
@@ -1956,25 +1958,34 @@
             Promise.race([renderPromise, timeoutPromise]).then(function (canvas) {
                 const imgData = canvas.toDataURL('image/jpeg', 0.98);
 
-                // Get the canvas dimensions
-                const canvasWidth = canvas.width;
-                const canvasHeight = canvas.height;
-
-                // Calculate PDF page size in mm to match the aspect ratio
-                // Use A4 width (210mm) as base and calculate height proportionally
-                const pdfWidth = 210;
-                const pdfHeight = (canvasHeight * pdfWidth) / canvasWidth;
-
-                // Create a single-page PDF with the exact dimensions
+                // Create a fixed A4 portrait PDF
                 const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF({
-                    orientation: pdfHeight > pdfWidth ? 'portrait' : 'landscape',
+                    orientation: 'portrait',
                     unit: 'mm',
-                    format: [pdfWidth, pdfHeight]
+                    format: 'a4'
                 });
 
-                // Place the full CV image on the single page
-                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                // Scale the captured image to fit within A4 while maintaining aspect ratio
+                const canvasWidth = canvas.width;
+                const canvasHeight = canvas.height;
+                const imgAspect = canvasHeight / canvasWidth;
+                const a4Aspect = A4_HEIGHT / A4_WIDTH;
+
+                let renderWidth = A4_WIDTH;
+                let renderHeight = A4_WIDTH * imgAspect;
+
+                // If content is taller than A4, scale down to fit height
+                if (renderHeight > A4_HEIGHT) {
+                    renderHeight = A4_HEIGHT;
+                    renderWidth = A4_HEIGHT / imgAspect;
+                }
+
+                // Center the image on the A4 page
+                const xOffset = (A4_WIDTH - renderWidth) / 2;
+                const yOffset = (A4_HEIGHT - renderHeight) / 2;
+
+                pdf.addImage(imgData, 'JPEG', xOffset, yOffset, renderWidth, renderHeight);
 
                 let fileName = 'My_CV';
                 const nameElement = document.getElementById('cv-name');
@@ -2039,28 +2050,41 @@
                 await new Promise(r => setTimeout(r, 500));
 
                 try {
+                    const A4_WIDTH = 210;
+                    const A4_HEIGHT = 297;
+
                     const canvas = await html2canvas(element, {
                         scale: 2,
                         useCORS: true,
                         logging: false,
-                        windowWidth: 794,
-                        width: 794
+                        windowWidth: element.scrollWidth,
+                        width: element.scrollWidth
                     });
 
                     const imgData = canvas.toDataURL('image/jpeg', 0.98);
                     const canvasWidth = canvas.width;
                     const canvasHeight = canvas.height;
-                    const pdfWidth = 210;
-                    const pdfHeight = (canvasHeight * pdfWidth) / canvasWidth;
+                    const imgAspect = canvasHeight / canvasWidth;
 
                     const { jsPDF } = window.jspdf;
                     const pdf = new jsPDF({
-                        orientation: pdfHeight > pdfWidth ? 'portrait' : 'landscape',
+                        orientation: 'portrait',
                         unit: 'mm',
-                        format: [pdfWidth, pdfHeight]
+                        format: 'a4'
                     });
 
-                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                    let renderWidth = A4_WIDTH;
+                    let renderHeight = A4_WIDTH * imgAspect;
+
+                    if (renderHeight > A4_HEIGHT) {
+                        renderHeight = A4_HEIGHT;
+                        renderWidth = A4_HEIGHT / imgAspect;
+                    }
+
+                    const xOffset = (A4_WIDTH - renderWidth) / 2;
+                    const yOffset = (A4_HEIGHT - renderHeight) / 2;
+
+                    pdf.addImage(imgData, 'JPEG', xOffset, yOffset, renderWidth, renderHeight);
                     pdf.save(`${fileNameBase}_${displayNames[i]}.pdf`);
 
                 } catch (err) {
